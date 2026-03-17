@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>두손종합광고 | DOOSON SIGNAGE COMPANY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #354b7a;
+            --primary-light: #4a6499;
+            --accent: #406619;
+            --accent-light: #5a8f24;
+            --white: #ffffff;
+            --light-gray: #f5f7fa;
+            --gray: #e2e8f0;
+            --text-dark: #1a2340;
+            --text-medium: #4a5568;
+            --text-light: #718096;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-dark);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ─── NAVIGATION ─── */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 22px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.4s ease;
+        }
+        .nav.scrolled {
+            background: rgba(255,255,255,0.97);
+            padding: 14px 60px;
+            box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+        }
+        .nav-logo { text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .nav-logo .logo-img {
+            height: 44px; width: auto;
+            filter: brightness(0) invert(1);
+            transition: filter 0.4s;
+        }
+        .nav.scrolled .logo-img { filter: none; }
+        .nav-logo .logo-texts { display: flex; flex-direction: column; }
+        .nav-logo .logo-kr {
+            font-size: 20px; font-weight: 800;
+            color: white; letter-spacing: -0.5px;
+            transition: color 0.4s;
+        }
+        .nav-logo .logo-en {
+            font-size: 10px; font-weight: 400;
+            color: rgba(255,255,255,0.65); letter-spacing: 1.5px;
+            transition: color 0.4s;
+        }
+        .nav.scrolled .logo-kr { color: var(--primary); }
+        .nav.scrolled .logo-en { color: var(--text-light); }
+
+        .nav-menu { display: flex; list-style: none; gap: 36px; align-items: center; }
+        .nav-menu a {
+            text-decoration: none; font-size: 15px; font-weight: 500;
+            color: rgba(255,255,255,0.88); transition: all 0.3s;
+            position: relative;
+        }
+        .nav-menu a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--accent);
+            transition: width 0.3s;
+        }
+        .nav-menu a:hover::after { width: 100%; }
+        .nav.scrolled .nav-menu a { color: var(--text-dark); }
+
+        .nav-cta {
+            background: var(--accent) !important;
+            color: white !important;
+            padding: 9px 22px;
+            border-radius: 4px;
+            font-weight: 600 !important;
+            transition: background 0.3s !important;
+        }
+        .nav-cta:hover { background: var(--accent-light) !important; }
+        .nav-cta::after { display: none !important; }
+
+        .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .nav-toggle span { display: block; width: 24px; height: 2px; background: white; transition: all 0.3s; }
+        .nav.scrolled .nav-toggle span { background: var(--text-dark); }
+
+        /* ─── HERO ─── */
+        .hero {
+            height: 100vh; min-height: 700px;
+            background: linear-gradient(135deg, #111e35 0%, #1e3358 40%, #2a4a7a 100%);
+            display: flex; align-items: center;
+            position: relative; overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1920&q=80') center/cover no-repeat;
+            opacity: 0.12;
+        }
+        .hero-grid {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .hero-content {
+            position: relative; z-index: 1;
+            max-width: 1200px; margin: 0 auto;
+            padding: 0 60px; width: 100%;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(64,102,25,0.25); border: 1px solid rgba(90,143,36,0.4);
+            color: #a3d46a; padding: 6px 18px; border-radius: 20px;
+            font-size: 13px; font-weight: 500; margin-bottom: 28px; letter-spacing: 0.5px;
+        }
+        .hero-badge::before {
+            content: ''; width: 6px; height: 6px; border-radius: 50%;
+            background: #a3d46a; animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+        .hero-title {
+            font-size: clamp(34px, 4.5vw, 58px); font-weight: 900;
+            color: white; line-height: 1.15; margin-bottom: 8px; letter-spacing: -1px;
+        }
+        .hero-typing-wrap {
+            font-size: clamp(34px, 4.5vw, 58px); font-weight: 900;
+            color: #a3d46a; line-height: 1.2; margin-bottom: 28px;
+            letter-spacing: -1px; min-height: 1.2em;
+        }
+        .cursor {
+            display: inline-block; width: 3px; height: 0.85em;
+            background: #a3d46a; margin-left: 3px; vertical-align: middle;
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        .hero-desc {
+            font-size: 17px; color: rgba(255,255,255,0.72);
+            line-height: 1.9; max-width: 540px; margin-bottom: 44px; font-weight: 300;
+        }
+        .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-primary {
+            background: var(--accent); color: white;
+            padding: 15px 34px; border-radius: 4px; font-size: 15px; font-weight: 600;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+            transition: all 0.3s; cursor: pointer;
+        }
+        .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(64,102,25,0.4); }
+        .btn-outline {
+            background: transparent; color: white;
+            padding: 15px 34px; border-radius: 4px; font-size: 15px; font-weight: 500;
+            text-decoration: none; border: 1px solid rgba(255,255,255,0.35);
+            display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s; cursor: pointer;
+        }
+        .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.65); }
+
+        .hero-scroll {
+            position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            color: rgba(255,255,255,0.45); font-size: 10px; letter-spacing: 2.5px;
+            text-transform: uppercase; cursor: pointer;
+        }
+        .scroll-line {
+            width: 1px; height: 36px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.45), transparent);
+            animation: scrollDown 2s infinite;
+        }
+        @keyframes scrollDown {
+            0%{transform:scaleY(0);transform-origin:top}
+            50%{transform:scaleY(1);transform-origin:top}
+            100%{transform:scaleY(0);transform-origin:bottom}
+        }
+
+        /* ─── SECTIONS COMMON ─── */
+        section { padding: 100px 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+
+        .sec-label {
+            font-size: 11px; font-weight: 700; color: var(--accent);
+            letter-spacing: 3.5px; text-transform: uppercase; margin-bottom: 10px;
+        }
+        .sec-divider { width: 36px; height: 3px; background: var(--accent); margin-bottom: 18px; }
+        .sec-title {
+            font-size: clamp(26px, 3vw, 42px); font-weight: 800;
+            color: var(--text-dark); line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 16px;
+        }
+        .sec-desc { font-size: 16px; color: var(--text-medium); line-height: 1.85; max-width: 580px; }
+
+        /* Reveal animation */
+        .reveal { opacity: 0; transform: translateY(28px); transition: all 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ─── ABOUT ─── */
+        .about { background: var(--white); }
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 80px; align-items: center; margin-top: 60px;
+        }
+        .about-img-wrap { position: relative; }
+        .about-img-wrap img {
+            width: 100%; height: 500px; object-fit: cover; border-radius: 2px;
+            display: block;
+        }
+
+        /* ─── ABOUT STATS (count-up) ─── */
+        .about-stats {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 0; margin-top: 60px;
+            border: 1px solid var(--gray); border-radius: 2px;
+            overflow: hidden;
+        }
+        .astat-item {
+            padding: 40px 32px; text-align: center;
+            border-right: 1px solid var(--gray);
+            position: relative;
+        }
+        .astat-item:last-child { border-right: none; }
+        .astat-item::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 3px; background: var(--primary);
+        }
+        .astat-num {
+            font-size: clamp(40px, 5vw, 64px); font-weight: 900;
+            color: var(--primary); line-height: 1; margin-bottom: 10px;
+        }
+        .astat-suffix { color: var(--accent); }
+        .astat-label { font-size: 14px; font-weight: 500; color: var(--text-medium); letter-spacing: 0.3px; }
+
+        .about-features {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 14px; margin: 28px 0 32px;
+        }
+        .feat-item {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 16px; background: var(--light-gray); border-radius: 2px;
+        }
+        .feat-icon {
+            width: 36px; height: 36px; border-radius: 4px;
+            background: var(--primary); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; flex-shrink: 0;
+        }
+        .feat-text h4 { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+        .feat-text p { font-size: 12px; color: var(--text-light); }
+
+        /* ─── KEY PORTFOLIO SLIDER (replacing CEO) ─── */
+        .key-portfolio { background: var(--light-gray); padding: 100px 0; }
+        .kp-slider-wrap {
+            position: relative; margin-top: 48px;
+            overflow: hidden; border-radius: 4px;
+        }
+        .kp-slider {
+            display: flex; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .kp-slide {
+            min-width: 100%; position: relative; cursor: pointer;
+        }
+        .kp-slide img {
+            width: 100%; height: 560px; object-fit: cover; display: block;
+        }
+        .kp-slide-info {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(15,25,55,0.96) 0%, transparent 70%);
+            padding: 48px 56px 40px;
+        }
+        .kp-slide-cat {
+            font-size: 11px; font-weight: 700; color: #a3d46a;
+            letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px;
+        }
+        .kp-slide-title {
+            font-size: clamp(22px, 3vw, 36px); font-weight: 800;
+            color: white; margin-bottom: 8px; letter-spacing: -0.5px;
+        }
+        .kp-slide-desc { font-size: 15px; color: rgba(255,255,255,0.7); }
+        .kp-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 52px; height: 52px; border-radius: 50%;
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+            color: white; font-size: 18px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s; z-index: 10; backdrop-filter: blur(4px);
+        }
+        .kp-btn:hover { background: rgba(255,255,255,0.3); transform: translateY(-50%) scale(1.08); }
+        .kp-btn.prev { left: 24px; }
+        .kp-btn.next { right: 24px; }
+        .kp-dots {
+            position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 8px; z-index: 10;
+        }
+        .kp-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: rgba(255,255,255,0.4); cursor: pointer;
+            transition: all 0.3s; border: none;
+        }
+        .kp-dot.active { background: white; width: 24px; border-radius: 4px; }
+
+        /* ─── HISTORY (새 디자인 타임라인) ─── */
+        .history {
+            background: linear-gradient(160deg, #0f1d38 0%, #1a3057 50%, #0f1d38 100%);
+            position: relative; overflow: hidden;
+        }
+        .history::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+        .history .sec-label { color: #a3d46a; position: relative; }
+        .history .sec-divider { background: #a3d46a; position: relative; }
+        .history .sec-title { color: white; position: relative; }
+
+        /* ─── HISTORY 2-COL LAYOUT ─── */
+        .hist-layout {
+            display: grid;
+            grid-template-columns: 1fr 460px;
+            gap: 48px;
+            align-items: start;
+            margin-top: 64px;
+        }
+
+        /* ─── HISTORY SCROLL PANEL ─── */
+        .hist-scroll-panel {
+            height: 580px; overflow: hidden; position: relative;
+            display: flex; gap: 12px; border-radius: 8px;
+        }
+        .hist-scroll-panel::before,
+        .hist-scroll-panel::after {
+            content: ''; position: absolute; left: 0; right: 0;
+            height: 80px; z-index: 2; pointer-events: none;
+        }
+        .hist-scroll-panel::before {
+            top: 0;
+            background: linear-gradient(to bottom, #0f1d38 20%, transparent);
+        }
+        .hist-scroll-panel::after {
+            bottom: 0;
+            background: linear-gradient(to top, #0f1d38 20%, transparent);
+        }
+        .hist-scroll-col { flex: 1; overflow: hidden; }
+        .hist-scroll-track {
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .hist-scroll-col:nth-child(1) .hist-scroll-track {
+            animation: histUp 20s linear infinite;
+        }
+        .hist-scroll-col:nth-child(2) .hist-scroll-track {
+            animation: histDown 25s linear infinite;
+        }
+        @keyframes histUp {
+            0%   { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+        @keyframes histDown {
+            0%   { transform: translateY(-50%); }
+            100% { transform: translateY(0); }
+        }
+        .hist-scroll-img {
+            width: 100%; border-radius: 6px; object-fit: cover;
+            aspect-ratio: 4/3; display: block;
+        }
+
+        .hist-timeline {
+            display: flex; flex-direction: column; gap: 0;
+            position: relative;
+        }
+        .hist-timeline::before {
+            content: ''; position: absolute;
+            left: 120px; top: 0; bottom: 0; width: 2px;
+            background: linear-gradient(to bottom, transparent, rgba(163,212,106,0.5), rgba(163,212,106,0.5), transparent);
+        }
+        .hist-period {
+            display: grid; grid-template-columns: 120px 1fr;
+            gap: 0; position: relative; padding-bottom: 48px;
+            opacity: 0; transform: translateX(-20px); transition: all 0.7s ease;
+        }
+        .hist-period.visible { opacity: 1; transform: translateX(0); }
+        .hist-period:last-child { padding-bottom: 0; }
+
+        .hist-year-col {
+            padding-right: 48px; position: relative;
+            display: flex; flex-direction: column; align-items: flex-end; padding-top: 4px;
+        }
+        .hist-year-badge {
+            background: linear-gradient(135deg, var(--primary), #2a4a7a);
+            border: 2px solid rgba(163,212,106,0.5);
+            border-radius: 50%; width: 72px; height: 72px;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; text-align: center;
+            position: relative; z-index: 1;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .hist-year-badge .yr-main { font-size: 13px; font-weight: 900; color: #a3d46a; line-height: 1.1; }
+        .hist-year-badge .yr-sub { font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.1; }
+
+        .hist-connector {
+            position: absolute; right: -1px; top: 36px;
+            width: 48px; height: 2px;
+            background: linear-gradient(to right, transparent, rgba(163,212,106,0.4));
+        }
+
+        .hist-events-col {
+            padding-left: 40px; padding-top: 8px;
+        }
+        .hist-period-label {
+            font-size: 22px; font-weight: 800; color: white;
+            margin-bottom: 16px; letter-spacing: -0.5px;
+        }
+        .hist-event-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .hist-event-list li {
+            font-size: 14px; color: rgba(255,255,255,0.75);
+            display: flex; align-items: flex-start; gap: 10px; line-height: 1.6;
+        }
+        .hist-event-list li .evt-date {
+            font-size: 11px; font-weight: 700; color: #a3d46a;
+            white-space: nowrap; min-width: 52px; margin-top: 2px;
+        }
+        .hist-event-list li .evt-text { flex: 1; }
+
+        /* ─── SERVICES ─── */
+        .services { background: white; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+        .srv-card {
+            border: 1px solid var(--gray); border-radius: 2px;
+            overflow: hidden; transition: all 0.35s;
+        }
+        .srv-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 14px 44px rgba(53,75,122,0.13);
+            transform: translateY(-5px);
+        }
+        .srv-img { height: 220px; overflow: hidden; }
+        .srv-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.55s; }
+        .srv-card:hover .srv-img img { transform: scale(1.06); }
+        .srv-body { padding: 28px; }
+        .srv-num { font-size: 10px; font-weight: 700; color: var(--accent); letter-spacing: 2.5px; margin-bottom: 8px; }
+        .srv-name { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
+        .srv-desc { font-size: 14px; color: var(--text-medium); line-height: 1.75; margin-bottom: 16px; }
+        .srv-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { font-size: 11px; padding: 4px 10px; background: var(--light-gray); color: var(--text-medium); border-radius: 2px; font-weight: 500; }
+
+        /* ─── PROCESS ─── */
+        .process { background: var(--light-gray); }
+        .process-flow {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 0; margin: 56px 0 32px;
+            position: relative;
+        }
+        .process-flow::before {
+            content: ''; position: absolute;
+            top: 35px; left: 12.5%; right: 12.5%; height: 2px;
+            background: var(--gray); z-index: 0;
+        }
+        .proc-step {
+            display: flex; flex-direction: column; align-items: center;
+            text-align: center; position: relative; z-index: 1;
+            opacity: 0; transform: translateY(18px); transition: all 0.55s ease;
+        }
+        .proc-step.visible { opacity: 1; transform: translateY(0); }
+        .step-circle {
+            width: 70px; height: 70px; border-radius: 50%;
+            background: white; border: 2px solid var(--gray);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px; color: var(--gray);
+            margin-bottom: 14px; position: relative;
+            transition: all 0.5s;
+        }
+        .proc-step.visible .step-circle {
+            border-color: var(--primary); background: var(--primary); color: white;
+        }
+        .step-badge {
+            position: absolute; top: -4px; right: -4px;
+            width: 20px; height: 20px; border-radius: 50%;
+            background: var(--accent); color: white;
+            font-size: 10px; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .step-arrow {
+            position: absolute; right: -14px; top: 26px;
+            color: var(--primary-light); font-size: 16px; z-index: 2;
+        }
+        .step-label { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+
+        .process-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .proc-card {
+            background: white; border-radius: 2px; padding: 22px;
+            border-top: 3px solid var(--primary);
+        }
+        .proc-card-title { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 14px; }
+        .proc-list { list-style: none; }
+        .proc-list li {
+            font-size: 13px; color: var(--text-medium);
+            padding: 5px 0; border-bottom: 1px solid var(--light-gray);
+            display: flex; align-items: center; gap: 7px;
+        }
+        .proc-list li::before {
+            content: ''; width: 4px; height: 4px; border-radius: 50%;
+            background: var(--accent); flex-shrink: 0;
+        }
+        .proc-list li:last-child { border-bottom: none; }
+
+        /* ─── PORTFOLIO ─── */
+        .portfolio { background: white; }
+
+        .pf-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 24px; margin-top: 44px;
+        }
+        .pf-card {
+            border-radius: 10px; overflow: hidden; text-decoration: none;
+            display: block; background: white;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            transition: all 0.32s; position: relative;
+        }
+        .pf-card:hover {
+            box-shadow: 0 12px 40px rgba(53,75,122,0.15);
+            transform: translateY(-5px);
+        }
+        .pf-img-wrap { position: relative; overflow: hidden; height: 220px; }
+        .pf-img-wrap img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.45s;
+        }
+        .pf-card:hover .pf-img-wrap img { transform: scale(1.06); }
+        .pf-badge {
+            position: absolute; top: 14px; left: 14px;
+            padding: 5px 12px; border-radius: 20px;
+            font-size: 12px; font-weight: 700; color: white;
+            letter-spacing: 0.3px;
+        }
+        .pf-badge.병원   { background: #2196a0; }
+        .pf-badge.공기관 { background: #354b7a; }
+        .pf-badge.fb     { background: #e07b39; }
+        .pf-badge.기타   { background: #5a7a3a; }
+        .pf-blog-btn {
+            position: absolute; top: 14px; right: 14px;
+            background: rgba(255,255,255,0.92); color: var(--primary);
+            font-size: 11px; font-weight: 700; padding: 5px 11px;
+            border-radius: 20px; display: flex; align-items: center; gap: 5px;
+            text-decoration: none; transition: all 0.2s;
+        }
+        .pf-blog-btn:hover { background: var(--primary); color: white; }
+        .pf-body { padding: 20px 22px; }
+        .pf-title {
+            font-size: 15px; font-weight: 700; color: var(--text-dark);
+            line-height: 1.5; margin-bottom: 8px;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .pf-tags { font-size: 12px; color: var(--text-light); }
+
+        .blog-more-wrap { text-align: center; margin-top: 44px; }
+        .blog-more-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 15px 40px; border: 2px solid var(--primary);
+            color: var(--primary); text-decoration: none;
+            font-size: 15px; font-weight: 600; border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .blog-more-btn:hover {
+            background: var(--primary); color: white;
+            transform: translateY(-2px); box-shadow: 0 8px 24px rgba(53,75,122,0.25);
+        }
+
+        /* ─── INSTAGRAM SECTION ─── */
+        .insta-section { background: var(--light-gray); padding: 100px 0; }
+        .insta-header {
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 16px; margin-bottom: 40px;
+        }
+        .insta-handle {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 15px; color: var(--text-medium); text-decoration: none;
+            background: white; padding: 10px 20px; border-radius: 24px;
+            border: 1px solid var(--gray); transition: all 0.3s;
+            font-weight: 500;
+        }
+        .insta-handle i { background: linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 18px; }
+        .insta-handle:hover { border-color: #cc2366; box-shadow: 0 4px 16px rgba(204,35,102,0.15); }
+
+        .insta-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+        }
+        .insta-placeholder {
+            aspect-ratio: 1; background: var(--gray); border-radius: 2px;
+            overflow: hidden; position: relative;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .insta-placeholder img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .insta-placeholder-icon { color: rgba(180,180,180,0.6); font-size: 28px; }
+        .insta-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(204,35,102,0.85), rgba(176,24,136,0.85));
+            opacity: 0; transition: opacity 0.3s;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 28px;
+        }
+        .insta-placeholder:hover .insta-overlay { opacity: 1; }
+
+        .insta-cta { text-align: center; margin-top: 32px; }
+        .insta-cta a {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 14px 36px; border-radius: 4px;
+            background: linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888);
+            color: white; text-decoration: none; font-size: 15px; font-weight: 600;
+            transition: all 0.3s;
+        }
+        .insta-cta a:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(204,35,102,0.35); }
+
+        /* ─── CONTACT ─── */
+        .contact { background: var(--white); }
+        .contact-grid {
+            display: grid; grid-template-columns: 1fr 1.6fr;
+            gap: 60px; margin-top: 56px;
+        }
+        .contact-info h3 { font-size: 22px; font-weight: 700; color: var(--text-dark); margin-bottom: 28px; line-height: 1.4; }
+        .ci-item { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 22px; }
+        .ci-icon {
+            width: 44px; height: 44px; border-radius: 4px;
+            background: var(--primary); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 17px; flex-shrink: 0;
+        }
+        .ci-detail h4 { font-size: 12px; font-weight: 600; color: var(--text-light); letter-spacing: 0.5px; margin-bottom: 4px; }
+        .ci-detail p { font-size: 14px; color: var(--text-dark); font-weight: 500; line-height: 1.6; }
+
+        .form-wrap {
+            background: var(--light-gray); border-radius: 2px; padding: 40px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+        }
+        .form-title { font-size: 19px; font-weight: 700; color: var(--text-dark); margin-bottom: 5px; }
+        .form-sub { font-size: 13px; color: var(--text-light); margin-bottom: 26px; }
+        .form-group { margin-bottom: 18px; }
+        .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--text-dark); margin-bottom: 7px; }
+        .form-label .req { color: var(--accent); margin-left: 2px; }
+        .form-input {
+            width: 100%; padding: 12px 15px;
+            border: 1px solid var(--gray); border-radius: 3px;
+            font-size: 14px; font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-dark); background: white; transition: border-color 0.3s;
+        }
+        .form-input:focus { outline: none; border-color: var(--primary); }
+        .form-textarea { height: 110px; resize: none; }
+        .cb-group { display: flex; flex-wrap: wrap; gap: 12px; }
+        .cb-item { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+        .cb-item input { width: 15px; height: 15px; accent-color: var(--primary); cursor: pointer; }
+        .cb-item label { font-size: 14px; color: var(--text-dark); cursor: pointer; }
+        .privacy-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 18px; }
+        .privacy-row input { width: 15px; height: 15px; accent-color: var(--primary); flex-shrink: 0; margin-top: 2px; cursor: pointer; }
+        .privacy-txt { font-size: 12px; color: var(--text-light); line-height: 1.7; }
+        .privacy-link { color: var(--primary); text-decoration: underline; cursor: pointer; }
+        .form-btn {
+            width: 100%; padding: 15px;
+            background: var(--primary); color: white; border: none; border-radius: 3px;
+            font-size: 15px; font-weight: 600; font-family: 'Noto Sans KR', sans-serif;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .form-btn:hover { background: var(--primary-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(53,75,122,0.3); }
+
+        /* ─── FOOTER ─── */
+        .footer { background: #0d1625; color: rgba(255,255,255,0.55); padding: 64px 0 28px; }
+        .footer-grid {
+            display: grid; grid-template-columns: 1.6fr 1fr 1fr;
+            gap: 56px; margin-bottom: 48px;
+        }
+        .footer-logo-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+        .footer-logo-wrap img { height: 40px; width: auto; filter: brightness(0) invert(1) opacity(0.85); }
+        .footer-logo-texts { display: flex; flex-direction: column; }
+        .footer .logo-kr { font-size: 20px; font-weight: 800; color: white; margin-bottom: 2px; }
+        .footer .logo-en { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.35); }
+        .footer-desc { font-size: 13px; line-height: 1.85; }
+        .foot-info { margin-top: 22px; display: flex; flex-direction: column; gap: 7px; }
+        .foot-info-row { font-size: 12px; display: flex; gap: 10px; }
+        .foot-info-row .lbl { color: rgba(255,255,255,0.35); min-width: 58px; }
+        .foot-info-row .val { color: rgba(255,255,255,0.65); }
+        .footer-nav h4 { font-size: 13px; font-weight: 600; color: white; margin-bottom: 18px; }
+        .footer-nav ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-nav a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s; }
+        .footer-nav a:hover { color: white; }
+        .footer-nav a i { margin-right: 6px; width: 14px; }
+        .foot-bottom {
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding-top: 22px; display: flex; justify-content: space-between; align-items: center; font-size: 11px;
+        }
+        .foot-sns { display: flex; gap: 10px; }
+        .sns-ico {
+            width: 34px; height: 34px; border-radius: 4px;
+            background: rgba(255,255,255,0.07);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px;
+            transition: all 0.3s;
+        }
+        .sns-ico:hover { background: var(--primary); color: white; }
+
+        /* ─── FLOATING BUTTONS ─── */
+        .floating-btns {
+            position: fixed; right: 22px; bottom: 36px;
+            display: flex; flex-direction: column; gap: 10px; z-index: 998;
+        }
+        .float-btn {
+            width: 56px; height: 56px; border-radius: 50%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-decoration: none; transition: all 0.3s;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.22); position: relative;
+        }
+        .float-btn i { font-size: 20px; margin-bottom: 1px; }
+        .float-btn span { font-size: 9px; font-weight: 600; white-space: nowrap; }
+        .float-btn:hover { transform: translateY(-3px) scale(1.07); box-shadow: 0 8px 26px rgba(0,0,0,0.3); }
+        .float-btn.consult { background: var(--accent); color: white; }
+        .float-btn.blog { background: #03c75a; color: white; }
+        .float-btn.insta {
+            background: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888);
+            color: white;
+        }
+        .float-tip {
+            position: absolute; right: 66px; top: 50%; transform: translateY(-50%);
+            background: rgba(15,24,40,0.9); color: white; padding: 6px 12px;
+            border-radius: 4px; font-size: 12px; white-space: nowrap;
+            opacity: 0; pointer-events: none; transition: opacity 0.2s;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .float-btn:hover .float-tip { opacity: 1; }
+
+        /* ─── MODAL ─── */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.55); z-index: 9000;
+            align-items: center; justify-content: center;
+        }
+        .modal-box {
+            background: white; border-radius: 4px; padding: 40px;
+            max-width: 560px; width: 90%; max-height: 78vh; overflow-y: auto;
+        }
+        .modal-box h3 { font-size: 19px; font-weight: 700; color: var(--text-dark); margin-bottom: 18px; }
+        .modal-box p { font-size: 13px; line-height: 2; color: var(--text-medium); }
+        .modal-box strong { color: var(--text-dark); }
+        .modal-close {
+            margin-top: 22px; padding: 11px 26px;
+            background: var(--primary); color: white;
+            border: none; border-radius: 3px; font-size: 14px;
+            cursor: pointer; font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .nav { padding: 18px 32px; }
+            .nav.scrolled { padding: 12px 32px; }
+            .container { padding: 0 32px; }
+            .hero-content { padding: 0 32px; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-stats { grid-template-columns: repeat(3, 1fr); }
+            .services-grid, .process-cards { grid-template-columns: 1fr 1fr; }
+            .process-flow { grid-template-columns: 1fr 1fr; gap: 24px; }
+            .process-flow::before { display: none; }
+            .step-arrow { display: none; }
+            .pf-grid { grid-template-columns: repeat(2, 1fr); }
+            .insta-grid { grid-template-columns: repeat(4, 1fr); }
+            .hist-layout { grid-template-columns: 1fr; }
+            .hist-scroll-panel { display: none; }
+            .hist-timeline::before { left: 90px; }
+            .hist-timeline { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+            .hist-timeline::before { display: none; }
+            .hist-period { grid-template-columns: 1fr; gap: 16px; }
+            .hist-year-col { align-items: flex-start; padding-right: 0; }
+            .hist-connector { display: none; }
+        }
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .nav-toggle { display: flex; }
+            section { padding: 70px 0; }
+            .services-grid, .process-cards, .pf-grid { grid-template-columns: 1fr; }
+            .process-flow { grid-template-columns: 1fr 1fr; }
+            .contact-grid, .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+            .about-features { grid-template-columns: 1fr; }
+            .about-stats { grid-template-columns: 1fr; }
+            .astat-item { border-right: none; border-bottom: 1px solid var(--gray); }
+            .astat-item:last-child { border-bottom: none; }
+            .hist-timeline { grid-template-columns: 1fr; }
+            .kp-slide img { height: 340px; }
+            .insta-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ────── NAV ────── -->
+<nav class="nav" id="nav">
+    <a href="#" class="nav-logo">
+        <img src="포폴 이미지/이미지파일/두손로고.png" alt="두손종합광고 로고" class="logo-img">
+        <div class="logo-texts">
+            <span class="logo-kr">두손종합광고</span>
+            <span class="logo-en">DOOSON SIGNAGE COMPANY</span>
+        </div>
+    </a>
+    <ul class="nav-menu" id="navMenu">
+        <li><a href="#about">회사소개</a></li>
+        <li><a href="#services">사업영역</a></li>
+        <li><a href="#portfolio">포트폴리오</a></li>
+        <li><a href="#contact" class="nav-cta">상담문의</a></li>
+    </ul>
+    <div class="nav-toggle" id="navToggle">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<!-- ────── HERO ────── -->
+<section class="hero" id="top">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+        <div class="hero-badge">국가공인 옥외광고사 보유 업체</div>
+        <h1 class="hero-title">공간의 가치를 높이는</h1>
+        <div class="hero-typing-wrap">
+            <span id="typingText"></span><span class="cursor"></span>
+        </div>
+        <p class="hero-desc">
+            두손종합광고는 간판·대형 실사인쇄·기타 사인물의 디자인부터 제작, 시공까지
+            원스탭 솔루션을 제공하는 인천 남동구 기반의 사인물 전문업체입니다.
+        </p>
+        <div class="hero-buttons">
+            <a class="btn-primary" onclick="goTo('contact')"><i class="fas fa-comments"></i> 무료 상담 신청</a>
+            <a class="btn-outline" onclick="goTo('portfolio')"><i class="fas fa-images"></i> 시공사례 보기</a>
+        </div>
+    </div>
+    <div class="hero-scroll" onclick="goTo('about')">
+        <span>SCROLL</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- ────── ABOUT ────── -->
+<section class="about" id="about">
+    <div class="container">
+        <div class="reveal">
+            <p class="sec-label">ABOUT US</p>
+            <div class="sec-divider"></div>
+            <h2 class="sec-title">'두손'의 정성으로<br>고객의 공간에 가치를 더합니다</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-img-wrap reveal">
+                <img src="포폴 이미지/이미지파일/두손회사.JPG" alt="두손종합광고">
+            </div>
+            <div class="reveal">
+                <p class="sec-desc">
+                    두손종합광고는 인천 남동구에 위치한 간판 전문업체로, 외부 및 내부 광고 사인물의
+                    디자인부터 제작, 시공까지 원스탭 솔루션을 제공합니다.<br><br>
+                    '두손'이라는 이름처럼 진심을 다하는 정성과, 장인처럼 체득한 풍부한 현장 경험을
+                    바탕으로 고객의 공간과 비즈니스에 가치를 더해드립니다.
+                </p>
+                <div class="about-features">
+                    <div class="feat-item">
+                        <div class="feat-icon"><i class="fas fa-award"></i></div>
+                        <div class="feat-text"><h4>국가공인 자격 보유</h4><p>국가공인 옥외광고사 취득</p></div>
+                    </div>
+                    <div class="feat-item">
+                        <div class="feat-icon"><i class="fas fa-layer-group"></i></div>
+                        <div class="feat-text"><h4>원스탑 솔루션</h4><p>디자인·제작·시공 일괄 진행</p></div>
+                    </div>
+                    <div class="feat-item">
+                        <div class="feat-icon"><i class="fas fa-tools"></i></div>
+                        <div class="feat-text"><h4>전문 장비 보유</h4><p>레이저용접기 등 첨단 장비</p></div>
+                    </div>
+                    <div class="feat-item">
+                        <div class="feat-icon"><i class="fas fa-users"></i></div>
+                        <div class="feat-text"><h4>전문 인력 구성</h4><p>디자인팀·기획팀·시공팀</p></div>
+                    </div>
+                </div>
+                <a class="btn-primary" onclick="goTo('contact')" style="width:fit-content;cursor:pointer;">
+                    <i class="fas fa-phone"></i> 지금 상담받기
+                </a>
+            </div>
+        </div>
+
+        <!-- 수치 카운트업 -->
+        <div class="about-stats reveal" id="aboutStats">
+            <div class="astat-item">
+                <div class="astat-num" data-target="8" data-suffix="+">0</div>
+                <div class="astat-label">업력 (년)</div>
+            </div>
+            <div class="astat-item">
+                <div class="astat-num" data-target="99" data-suffix="%">0</div>
+                <div class="astat-label">고객 만족도</div>
+            </div>
+            <div class="astat-item">
+                <div class="astat-num" data-target="165" data-suffix="%">0</div>
+                <div class="astat-label">연평균 성장률</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ────── KEY PORTFOLIO SLIDER (주요 포트폴리오) ────── -->
+<section class="key-portfolio">
+    <div class="container">
+        <div class="reveal">
+            <p class="sec-label">KEY PORTFOLIO</p>
+            <div class="sec-divider"></div>
+            <h2 class="sec-title">주요 포트폴리오</h2>
+            <p class="sec-desc">두손종합광고가 완성한 대표 시공 사례들을 소개합니다.</p>
+        </div>
+        <div class="kp-slider-wrap reveal">
+            <div class="kp-slider" id="kpSlider">
+                <div class="kp-slide">
+                    <img src="포폴 이미지/이미지파일/아인.jpg" alt="아인병원">
+                    <div class="kp-slide-info">
+                        <div class="kp-slide-cat">의료 / 병원</div>
+                        <div class="kp-slide-title">아인병원 (아인의료재단)</div>
+                        <div class="kp-slide-desc">건물 채널 간판 제작 및 시공 · client : 아인의료재단</div>
+                    </div>
+                </div>
+                <div class="kp-slide">
+                    <img src="포폴 이미지/이미지파일/스마트테크노타워.jpg" alt="스마트테크노타워">
+                    <div class="kp-slide-info">
+                        <div class="kp-slide-cat">건물 / 공공</div>
+                        <div class="kp-slide-title">스마트테크노타워</div>
+                        <div class="kp-slide-desc">건물 동편 및 서편 건물간판 · client : 주안스마트테크노타워 건물 관리단</div>
+                    </div>
+                </div>
+                <div class="kp-slide">
+                    <img src="포폴 이미지/이미지파일/굿모닝치과.jpg" alt="굿모닝치과의원">
+                    <div class="kp-slide-info">
+                        <div class="kp-slide-cat">의료 / 병원</div>
+                        <div class="kp-slide-title">굿모닝치과의원</div>
+                        <div class="kp-slide-desc">외부 간판 및 설치물 제작·시공 / 외부 유리 타공 시트 제작·시공 · client : 굿모닝치과의원</div>
+                    </div>
+                </div>
+                <div class="kp-slide">
+                    <img src="포폴 이미지/이미지파일/프렌즈스크린.jpg" alt="프렌즈스크린">
+                    <div class="kp-slide-info">
+                        <div class="kp-slide-cat">상업공간</div>
+                        <div class="kp-slide-title">프렌즈스크린</div>
+                        <div class="kp-slide-desc">외부 간판 및 내부 사인물·시트 외 시공 · client : 대전도안점, 인천구월점, 김포점, 호계대왕점, 장분도점 등</div>
+                    </div>
+                </div>
+                <div class="kp-slide">
+                    <img src="포폴 이미지/이미지파일/공항.jpg" alt="인천국제공항 T2">
+                    <div class="kp-slide-info">
+                        <div class="kp-slide-cat">건물 / 공공</div>
+                        <div class="kp-slide-title">인천국제공항 T2</div>
+                        <div class="kp-slide-desc">시편 그래픽시트 제작 및 시공 · 시공 면적 4,000㎡ / 시공인원 150명 · client : 대즐기획/에스아트컴퍼니</div>
+                    </div>
+                </div>
+            </div>
+            <button class="kp-btn prev" id="kpPrev"><i class="fas fa-chevron-left"></i></button>
+            <button class="kp-btn next" id="kpNext"><i class="fas fa-chevron-right"></i></button>
+            <div class="kp-dots" id="kpDots"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ────── HISTORY ────── -->
+<section class="history">
+    <div class="container">
+        <div class="reveal">
+            <p class="sec-label">OUR HISTORY</p>
+            <div class="sec-divider"></div>
+            <h2 class="sec-title">꾸준한 성장의 발자취</h2>
+        </div>
+        <div class="hist-layout">
+            <!-- LEFT: timeline -->
+            <div class="hist-timeline">
+                <div class="hist-period">
+                    <div class="hist-year-col">
+                        <div class="hist-year-badge">
+                            <div class="yr-main">2017</div>
+                            <div class="yr-sub">~2019</div>
+                        </div>
+                        <div class="hist-connector"></div>
+                    </div>
+                    <div class="hist-events-col">
+                        <div class="hist-period-label">2017 — 2019</div>
+                        <ul class="hist-event-list">
+                            <li><span class="evt-date">17.07</span><span class="evt-text">[두손인쇄] 인수</span></li>
+                            <li><span class="evt-date">18.04</span><span class="evt-text">간판/옥외광고물 분야 전환</span></li>
+                            <li><span class="evt-date">19.04</span><span class="evt-text">국가공인 옥외광고사 취득</span></li>
+                            <li><span class="evt-date">19.11</span><span class="evt-text">아이사랑꿈터 지점별 시공</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hist-period">
+                    <div class="hist-year-col">
+                        <div class="hist-year-badge">
+                            <div class="yr-main">2020</div>
+                            <div class="yr-sub">~2022</div>
+                        </div>
+                        <div class="hist-connector"></div>
+                    </div>
+                    <div class="hist-events-col">
+                        <div class="hist-period-label">2020 — 2022</div>
+                        <ul class="hist-event-list">
+                            <li><span class="evt-date">20.05</span><span class="evt-text">동인천 연합 부동산 다수 시공</span></li>
+                            <li><span class="evt-date">21.05</span><span class="evt-text">프렌즈스크린 지점별 수주 시작</span></li>
+                            <li><span class="evt-date">21.05</span><span class="evt-text">굿모닝치과의원 외 병원간판 시공</span></li>
+                            <li><span class="evt-date">22.06</span><span class="evt-text">기획/디자인 전문 인력 보강 (디자인사무실 확장)</span></li>
+                            <li><span class="evt-date">22.07</span><span class="evt-text">인천 남동구 일대 공영주차게시판 교체 수주</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hist-period">
+                    <div class="hist-year-col">
+                        <div class="hist-year-badge">
+                            <div class="yr-main">2023</div>
+                            <div class="yr-sub">~2025</div>
+                        </div>
+                        <div class="hist-connector"></div>
+                    </div>
+                    <div class="hist-events-col">
+                        <div class="hist-period-label">2023 — 2025</div>
+                        <ul class="hist-event-list">
+                            <li><span class="evt-date">23.12</span><span class="evt-text">스마트테크노타워 준공사인물</span></li>
+                            <li><span class="evt-date">24.01</span><span class="evt-text">디자인사무실 이전 (작업장2)</span></li>
+                            <li><span class="evt-date">24.11</span><span class="evt-text">인천국제공항 T2 시트 시공 수주</span></li>
+                            <li><span class="evt-date">25.03</span><span class="evt-text">한국건강증진협회 시공 외</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: infinite vertical scroll images -->
+            <div class="hist-scroll-panel">
+                <!-- 왼쪽 열: 위로 스크롤 (포폴1~5) -->
+                <div class="hist-scroll-col">
+                    <div class="hist-scroll-track">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴1.jpg" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴2.png" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴3.jpg" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴4.jpg" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴5.jpg" alt="시공사례">
+                        <!-- 루프를 위한 복사본 -->
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴1.jpg" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴2.png" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴3.jpg" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴4.jpg" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴5.jpg" alt="시공사례">
+                    </div>
+                </div>
+                <!-- 오른쪽 열: 아래로 스크롤 (포폴6~9) -->
+                <div class="hist-scroll-col">
+                    <div class="hist-scroll-track">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴6.jpg" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴7.jpg" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴8.jpg" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴9.jpg" alt="시공사례">
+                        <!-- 루프를 위한 복사본 -->
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴6.jpg" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴7.jpg" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴8.jpg" alt="시공사례">
+                        <img class="hist-scroll-img" src="포폴 이미지/이미지파일/포폴9.jpg" alt="시공사례">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ────── SERVICES ────── -->
+<section class="services" id="services">
+    <div class="container">
+        <div class="reveal">
+            <p class="sec-label">BUSINESS AREA</p>
+            <div class="sec-divider"></div>
+            <h2 class="sec-title">사업 영역</h2>
+            <p class="sec-desc">여러 공간과 비즈니스에 필요한 다양한 사인물을 디자인, 제작, 시공합니다.<br>
+            '간판'을 중심으로 대형 인쇄물과 경인쇄물까지 원스탭으로 진행해드립니다.</p>
+        </div>
+        <div class="services-grid">
+            <div class="srv-card reveal">
+                <div class="srv-img">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80" alt="간판">
+                </div>
+                <div class="srv-body">
+                    <div class="srv-num">01 — SIGNAGE</div>
+                    <div class="srv-name">간판</div>
+                    <p class="srv-desc">공간의 얼굴이 되는 모든 외·내부 간판류를 디자인부터 설치까지 완성합니다.</p>
+                    <div class="srv-tags">
+                        <span class="tag">LED 채널간판</span><span class="tag">후렉스간판</span>
+                        <span class="tag">네온간판</span><span class="tag">지주간판</span>
+                        <span class="tag">갈바간판</span><span class="tag">아크릴간판</span>
+                    </div>
+                </div>
+            </div>
+            <div class="srv-card reveal">
+                <div class="srv-img">
+                    <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&q=80" alt="대형 실사인쇄">
+                </div>
+                <div class="srv-body">
+                    <div class="srv-num">02 — LARGE PRINT</div>
+                    <div class="srv-name">대형 실사인쇄</div>
+                    <p class="srv-desc">고품질 출력 장비로 내외부 시트, 대형 현수막, 공사장 가림막까지 제작합니다.</p>
+                    <div class="srv-tags">
+                        <span class="tag">외부/내부 시트</span><span class="tag">공사장 가림막</span>
+                        <span class="tag">대형 현수막</span><span class="tag">기타 실사 출력</span>
+                    </div>
+                </div>
+            </div>
+            <div class="srv-card reveal">
+                <div class="srv-img">
+                    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&q=80" alt="기타 사인물">
+                </div>
+                <div class="srv-body">
+                    <div class="srv-num">03 — OTHER SIGNS</div>
+                    <div class="srv-name">기타 사인물</div>
+                    <p class="srv-desc">인포메이션 게시판, 현판, 배너 등 공간에 필요한 모든 사인물을 제작합니다.</p>
+                    <div class="srv-tags">
+                        <span class="tag">인포메이션 게시판</span><span class="tag">건물 경관바</span>
+                        <span class="tag">현판/표찰</span><span class="tag">배너</span>
+                        <span class="tag">기타 경인쇄물</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ────── PROCESS ────── -->
+<section class="process">
+    <div class="container">
+        <div class="reveal">
+            <p class="sec-label">BUSINESS PROCESS</p>
+            <div class="sec-divider"></div>
+            <h2 class="sec-title">사업 프로세스</h2>
+            <p class="sec-desc">상담부터 디자인, 시공, 사후 관리까지 클라이언트와 긴밀한 소통을 통해
+            과정부터 결과까지 만족감을 드릴 수 있도록 최선을 다합니다.</p>
+        </div>
+        <div class="process-flow" id="processFlow">
+            <div class="proc-step" data-delay="0">
+                <div class="step-circle">
+                    <i class="fas fa-comments"></i>
+                    <div class="step-badge">1</div>
+                </div>
+                <div class="step-label">문의 및 가견적</div>
+                <div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+            </div>
+            <div class="proc-step" data-delay="200">
+                <div class="step-circle">
+                    <i class="fas fa-ruler-combined"></i>
+                    <div class="step-badge">2</div>
+                </div>
+                <div class="step-label">실측 및 견적</div>
+                <div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+            </div>
+            <div class="proc-step" data-delay="400">
+                <div class="step-circle">
+                    <i class="fas fa-pencil-ruler"></i>
+                    <div class="step-badge">3</div>
+                </div>
+                <div class="step-label">시안 및 제작</div>
+                <div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+            </div>
+            <div class="proc-step" data-delay="600">
+                <div class="step-circle">
+                    <i class="fas fa-hard-hat"></i>
+                    <div class="step-badge">4</div>
+                </div>
+                <div class="step-label">시공 완료</div>
+            </div>
+        </div>
+        <div class="process-cards">
+            <div class="proc-card reveal">
+                <div class="proc-card-title">STEP 1 — 문의 및 가견적</div>
+                <ul class="proc-list">
+                    <li>현장 주소 제공</li>
+                    <li>현장 사진 전달</li>
+                    <li>레퍼런스 공유</li>
+                    <li>가견적 안내</li>
+                    <li>계약금 납부</li>
+                </ul>
+            </div>
+            <div class="proc-card reveal">
+                <div class="proc-card-title">STEP 2 — 실측 및 견적</div>
+                <ul class="proc-list">
+                    <li>현장 실측 진행</li>
+                    <li>상세 상담</li>
+                    <li>본 견적 확정</li>
+                </ul>
+            </div>
+            <div class="proc-card reveal">
+                <div class="proc-card-title">STEP 3 — 시안 및 제작</div>
+                <ul class="proc-list">
+                    <li>디자인 시안 제작</li>
+                    <li>중도금 납부</li>
+                    <li>제작 진행</li>
+                </ul>
+            </div>
+            <div class="proc-card reveal">
+                <div class="proc-card-title">STEP 4 — 시공</div>
+                <ul class="proc-list">
+                    <li>현장 시공 완료</li>
+                    <li>잔금 납부</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ────── PORTFOLIO (블로그 연동) ────── -->
+<section class="portfolio" id="portfolio">
+    <div class="container">
+        <div class="reveal">
+            <p class="sec-label">PORTFOLIO</p>
+            <div class="sec-divider"></div>
+            <h2 class="sec-title">시공 포트폴리오</h2>
+            <p class="sec-desc">두손종합광고가 직접 시공한 다양한 현장들을 확인해보세요.</p>
+        </div>
+        <div class="pf-grid reveal">
+
+            <!-- 1. 서울아산재활의학과의원 -->
+            <a class="pf-card" href="https://blog.naver.com/dooson5154/224049015051" target="_blank" rel="noopener">
+                <div class="pf-img-wrap">
+                    <img src="포폴 이미지/이미지파일/인천 구월동병원 서울아산재활의학과의원.png" alt="서울아산재활의학과의원">
+                    <span class="pf-badge 병원">병원</span>
+                    <span class="pf-blog-btn"><i class="fas fa-external-link-alt"></i> 블로그</span>
+                </div>
+                <div class="pf-body">
+                    <div class="pf-title">인천 구월동 서울아산재활의학과의원 외부 간판</div>
+                    <div class="pf-tags">채널 간판 · 시트 작업 · 2025.10</div>
+                </div>
+            </a>
+
+            <!-- 2. 소아랑한의원 -->
+            <a class="pf-card" href="https://blog.naver.com/dooson5154/223980867976" target="_blank" rel="noopener">
+                <div class="pf-img-wrap">
+                    <img src="포폴 이미지/이미지파일/인천 구월동 소아랑한의원.jpg" alt="소아랑한의원">
+                    <span class="pf-badge 병원">병원</span>
+                    <span class="pf-blog-btn"><i class="fas fa-external-link-alt"></i> 블로그</span>
+                </div>
+                <div class="pf-body">
+                    <div class="pf-title">인천 구월동 소아랑한의원 외부 간판</div>
+                    <div class="pf-tags">채널 간판 · LED · 2025.09</div>
+                </div>
+            </a>
+
+            <!-- 3. 이천경찰서 -->
+            <a class="pf-card" href="https://blog.naver.com/dooson5154/222978437123" target="_blank" rel="noopener">
+                <div class="pf-img-wrap">
+                    <img src="포폴 이미지/이미지파일/이천경찰서.jpg" alt="이천경찰서">
+                    <span class="pf-badge 공기관">공기관</span>
+                    <span class="pf-blog-btn"><i class="fas fa-external-link-alt"></i> 블로그</span>
+                </div>
+                <div class="pf-body">
+                    <div class="pf-title">이천경찰서 외부 간판</div>
+                    <div class="pf-tags">외부 사인 · 실내 사인 · 2022</div>
+                </div>
+            </a>
+
+            <!-- 4. 뱅글루 다이닝 와인바 -->
+            <a class="pf-card" href="https://blog.naver.com/dooson5154/223975951340" target="_blank" rel="noopener">
+                <div class="pf-img-wrap">
+                    <img src="포폴 이미지/이미지파일/다이닝 와인바.jpg" alt="뱅글루 다이닝 와인바">
+                    <span class="pf-badge fb">F&amp;B</span>
+                    <span class="pf-blog-btn"><i class="fas fa-external-link-alt"></i> 블로그</span>
+                </div>
+                <div class="pf-body">
+                    <div class="pf-title">신사동 뱅글루 다이닝 와인바 외부 간판</div>
+                    <div class="pf-tags">채널 간판 · LED · 2025.08</div>
+                </div>
+            </a>
+
+            <!-- 5. 시루모락 케이크 -->
+            <a class="pf-card" href="https://blog.naver.com/dooson5154/223971745990" target="_blank" rel="noopener">
+                <div class="pf-img-wrap">
+                    <img src="포폴 이미지/이미지파일/카페 시무모락 케이크.jpg" alt="시루모락 케이크">
+                    <span class="pf-badge fb">F&amp;B</span>
+                    <span class="pf-blog-btn"><i class="fas fa-external-link-alt"></i> 블로그</span>
+                </div>
+                <div class="pf-body">
+                    <div class="pf-title">영등포 시루모락 케이크 외부 간판</div>
+                    <div class="pf-tags">간판 · 유리 시트 · 2025.07</div>
+                </div>
+            </a>
+
+            <!-- 6. 비블럭클라이밍 실내 사인 -->
+            <a class="pf-card" href="https://blog.naver.com/dooson5154/223194404307" target="_blank" rel="noopener">
+                <div class="pf-img-wrap">
+                    <img src="포폴 이미지/이미지파일/실내사인.jpg" alt="비블럭클라이밍">
+                    <span class="pf-badge 기타">기타</span>
+                    <span class="pf-blog-btn"><i class="fas fa-external-link-alt"></i> 블로그</span>
+                </div>
+                <div class="pf-body">
+                    <div class="pf-title">영종도 비블럭클라이밍 실내 사인</div>
+                    <div class="pf-tags">실내 사인 · LED · 2023</div>
+                </div>
+            </a>
+
+        </div>
+        <div class="blog-more-wrap">
+            <a href="https://blog.naver.com/dooson5154" target="_blank" class="blog-more-btn">
+                <i class="fas fa-external-link-alt"></i> 더 많은 포트폴리오 보러가기
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ────── INSTAGRAM ────── -->
+<section class="insta-section">
+    <div class="container">
+        <div class="reveal">
+            <div class="insta-header">
+                <div>
+                    <p class="sec-label">INSTAGRAM</p>
+                    <div class="sec-divider"></div>
+                    <h2 class="sec-title">인스타그램</h2>
+                </div>
+                <a href="https://www.instagram.com/doosonsign" target="_blank" class="insta-handle">
+                    <i class="fab fa-instagram"></i> @doosonsign
+                </a>
+            </div>
+        </div>
+        <div class="insta-grid reveal">
+            <a href="https://www.instagram.com/doosonsign" target="_blank" class="insta-placeholder">
+                <img src="포폴 이미지/이미지파일/아인.jpg" alt="인스타그램">
+                <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+            </a>
+            <a href="https://www.instagram.com/doosonsign" target="_blank" class="insta-placeholder">
+                <img src="포폴 이미지/이미지파일/공항.jpg" alt="인스타그램">
+                <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+            </a>
+            <a href="https://www.instagram.com/doosonsign" target="_blank" class="insta-placeholder">
+                <img src="포폴 이미지/이미지파일/스마트테크노타워.jpg" alt="인스타그램">
+                <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+            </a>
+            <a href="https://www.instagram.com/doosonsign" target="_blank" class="insta-placeholder">
+                <img src="포폴 이미지/이미지파일/굿모닝치과.jpg" alt="인스타그램">
+                <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+            </a>
+            <a href="https://www.instagram.com/doosonsign" target="_blank" class="insta-placeholder">
+                <img src="포폴 이미지/이미지파일/프렌즈스크린.jpg" alt="인스타그램">
+                <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+            </a>
+            <a href="https://www.instagram.com/doosonsign" target="_blank" class="insta-placeholder">
+                <img src="포폴 이미지/이미지파일/두손회사.JPG" alt="인스타그램">
+                <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+            </a>
+            <a href="https://www.instagram.com/doosonsign" target="_blank" class="insta-placeholder">
+                <img src="포폴 이미지/이미지파일/아인.jpg" alt="인스타그램" style="filter:brightness(0.85)">
+                <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+            </a>
+            <a href="https://www.instagram.com/doosonsign" target="_blank" class="insta-placeholder">
+                <img src="포폴 이미지/이미지파일/공항.jpg" alt="인스타그램" style="filter:brightness(0.9) saturate(1.1)">
+                <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+            </a>
+        </div>
+        <div class="insta-cta reveal">
+            <a href="https://www.instagram.com/doosonsign" target="_blank">
+                <i class="fab fa-instagram"></i> 인스타그램에서 더 보기
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ────── CONTACT ────── -->
+<section class="contact" id="contact">
+    <div class="container">
+        <div class="reveal">
+            <p class="sec-label">CONTACT US</p>
+            <div class="sec-divider"></div>
+            <h2 class="sec-title">상담 &amp; 견적 문의</h2>
+            <p class="sec-desc">아래 양식에 맞춰 신청글을 남겨주시면 담당자가 연락 드리겠습니다.</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info reveal">
+                <h3>두손종합광고와 함께<br>소중한 시작을 함께합니다</h3>
+                <div class="ci-item">
+                    <div class="ci-icon"><i class="fas fa-phone"></i></div>
+                    <div class="ci-detail">
+                        <h4>전화 문의</h4>
+                        <p>032-461-5155<br>010-4822-5154</p>
+                    </div>
+                </div>
+                <div class="ci-item">
+                    <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="ci-detail">
+                        <h4>이메일</h4>
+                        <p>dooson5154@daum.net</p>
+                    </div>
+                </div>
+                <div class="ci-item">
+                    <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="ci-detail">
+                        <h4>주소</h4>
+                        <p>[작업장1] 인천시 남동구 남동대로 710<br>[작업장2] 인천시 남동구 남동대로 697</p>
+                    </div>
+                </div>
+                <div class="ci-item">
+                    <div class="ci-icon"><i class="fas fa-id-card"></i></div>
+                    <div class="ci-detail">
+                        <h4>사업자등록번호</h4>
+                        <p>868-13-00430</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-wrap reveal">
+                <div class="form-title">두손종합광고 상담 문의</div>
+                <div class="form-sub">담당자 확인 후 빠르게 연락드리겠습니다.</div>
+                <form id="contactForm" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label">상호 (또는 프로젝트명) <span class="req">*</span></label>
+                        <input type="text" class="form-input" placeholder="상호나 프로젝트명을 적어주세요." required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">연락처 <span class="req">*</span></label>
+                        <input type="tel" class="form-input" placeholder="담당자 연락처를 적어주세요." required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">현장 주소 <span class="req">*</span></label>
+                        <input type="text" class="form-input" placeholder="작업이 필요한 현장 장소를 적어주세요." required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">원하시는 작업 <span class="req">*</span></label>
+                        <div class="cb-group">
+                            <div class="cb-item"><input type="checkbox" id="w1"><label for="w1">간판</label></div>
+                            <div class="cb-item"><input type="checkbox" id="w2"><label for="w2">시트 작업</label></div>
+                            <div class="cb-item"><input type="checkbox" id="w3"><label for="w3">실내 사인</label></div>
+                            <div class="cb-item"><input type="checkbox" id="w4"><label for="w4">LED</label></div>
+                            <div class="cb-item"><input type="checkbox" id="w5"><label for="w5">기타</label></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">요청사항</label>
+                        <textarea class="form-input form-textarea" placeholder="요청사항을 남겨주세요."></textarea>
+                    </div>
+                    <div class="privacy-row">
+                        <input type="checkbox" id="privacyChk" required>
+                        <div class="privacy-txt">
+                            <span class="privacy-link" onclick="openPrivacy()">개인정보처리방침</span>에 동의합니다.
+                            수집된 정보는 상담 목적으로만 사용되며 완료 후 즉시 파기됩니다. (필수)
+                        </div>
+                    </div>
+                    <button type="submit" class="form-btn" id="submitBtn">상담 신청하기</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ────── FOOTER ────── -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo-wrap">
+                    <img src="포폴 이미지/이미지파일/두손로고.png" alt="두손종합광고 로고">
+                    <div class="footer-logo-texts">
+                        <div class="logo-kr">두손종합광고</div>
+                        <div class="logo-en">DOOSON SIGNAGE COMPANY</div>
+                    </div>
+                </div>
+                <p class="footer-desc">인천 남동구에 위치한 간판 전문업체로<br>디자인부터 제작, 시공까지 원스탭 솔루션을 제공합니다.</p>
+                <div class="foot-info">
+                    <div class="foot-info-row"><span class="lbl">대표자</span><span class="val">박종수</span></div>
+                    <div class="foot-info-row"><span class="lbl">사업자</span><span class="val">868-13-00430</span></div>
+                    <div class="foot-info-row"><span class="lbl">전화</span><span class="val">032-461-5155 / 010-4822-5154</span></div>
+                    <div class="foot-info-row"><span class="lbl">이메일</span><span class="val">dooson5154@daum.net</span></div>
+                    <div class="foot-info-row"><span class="lbl">주소</span><span class="val">인천시 남동구 남동대로 710 (작업장1) / 697 (작업장2)</span></div>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <h4>메뉴</h4>
+                <ul>
+                    <li><a href="#about">회사소개</a></li>
+                    <li><a href="#services">사업영역</a></li>
+                    <li><a href="#portfolio">포트폴리오</a></li>
+                    <li><a href="#contact">상담문의</a></li>
+                </ul>
+            </div>
+            <div class="footer-nav">
+                <h4>SNS 채널</h4>
+                <ul>
+                    <li><a href="https://blog.naver.com/dooson5154" target="_blank"><i class="fas fa-blog"></i> 네이버 블로그</a></li>
+                    <li><a href="https://www.instagram.com/doosonsign" target="_blank"><i class="fab fa-instagram"></i> 인스타그램</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="foot-bottom">
+            <span>© 2025 두손종합광고 (DOOSON SIGNAGE COMPANY). All rights reserved.</span>
+            <div class="foot-sns">
+                <a href="https://blog.naver.com/dooson5154" target="_blank" class="sns-ico"><i class="fas fa-blog"></i></a>
+                <a href="https://www.instagram.com/doosonsign" target="_blank" class="sns-ico"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ────── FLOATING BUTTONS ────── -->
+<div class="floating-btns">
+    <a class="float-btn consult" onclick="goTo('contact')" style="cursor:pointer;">
+        <i class="fas fa-comments"></i>
+        <span>상담문의</span>
+        <div class="float-tip">상담 &amp; 견적 문의</div>
+    </a>
+    <a href="https://blog.naver.com/dooson5154" target="_blank" class="float-btn blog">
+        <i class="fas fa-blog"></i>
+        <span>블로그</span>
+        <div class="float-tip">네이버 블로그</div>
+    </a>
+    <a href="https://www.instagram.com/doosonsign" target="_blank" class="float-btn insta">
+        <i class="fab fa-instagram"></i>
+        <span>인스타</span>
+        <div class="float-tip">인스타그램</div>
+    </a>
+</div>
+
+<!-- ────── PRIVACY MODAL ────── -->
+<div class="modal-overlay" id="privacyModal">
+    <div class="modal-box">
+        <h3>개인정보처리방침</h3>
+        <p>
+            <strong>두손종합광고</strong>는 개인정보보호법에 따라 이용자의 개인정보를 보호하고
+            이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 다음과 같이
+            개인정보처리방침을 수립·공개합니다.<br><br>
+            <strong>1. 수집하는 개인정보의 항목</strong><br>
+            상호(성명), 연락처, 현장 주소, 문의 내용<br><br>
+            <strong>2. 개인정보의 수집 및 이용 목적</strong><br>
+            견적 안내 및 상담 서비스 제공<br><br>
+            <strong>3. 개인정보의 보유 및 이용 기간</strong><br>
+            상담 완료 후 즉시 파기 (최대 3개월)<br><br>
+            <strong>4. 개인정보 제3자 제공</strong><br>
+            수집된 개인정보는 제3자에게 제공하지 않습니다.<br><br>
+            <strong>5. 개인정보처리 담당자</strong><br>
+            담당자: 박종수 / 이메일: dooson5154@daum.net
+        </p>
+        <button class="modal-close" onclick="closePrivacy()">확인</button>
+    </div>
+</div>
+
+<script>
+    /* ── 섹션 이동 함수 ── */
+    function goTo(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            const top = el.getBoundingClientRect().top + window.pageYOffset - 72;
+            window.scrollTo({ top, behavior: 'smooth' });
+        }
+    }
+
+    /* ── Typing Animation ── */
+    const words = ['간판 전문 기업', '사인물 원스탑 솔루션', '두손종합광고'];
+    let wIdx = 0, cIdx = 0, del = false;
+    const typEl = document.getElementById('typingText');
+    function type() {
+        const w = words[wIdx];
+        typEl.textContent = del ? w.slice(0, --cIdx) : w.slice(0, ++cIdx);
+        if (!del && cIdx === w.length) { setTimeout(() => { del = true; }, 2200); }
+        else if (del && cIdx === 0) { del = false; wIdx = (wIdx + 1) % words.length; }
+        setTimeout(type, del ? 55 : 95);
+    }
+    type();
+
+    /* ── Nav Scroll ── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    /* ── Scroll Reveal ── */
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(r => revealObs.observe(r));
+
+    /* ── History Timeline Reveal ── */
+    const histPeriods = document.querySelectorAll('.hist-period');
+    const histObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.2 });
+    histPeriods.forEach(p => histObs.observe(p));
+
+    /* ── Count-up Animation ── */
+    function animateCount(el) {
+        const target = parseInt(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1800;
+        const step = target / (duration / 16);
+        let current = 0;
+        const timer = setInterval(() => {
+            current = Math.min(current + step, target);
+            el.textContent = Math.floor(current) + suffix;
+            if (current >= target) clearInterval(timer);
+        }, 16);
+    }
+    const statsObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.querySelectorAll('.astat-num').forEach(animateCount);
+                statsObs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.4 });
+    const statsEl = document.getElementById('aboutStats');
+    if (statsEl) statsObs.observe(statsEl);
+
+    /* ── Key Portfolio Slider ── */
+    const slider = document.getElementById('kpSlider');
+    const dotsWrap = document.getElementById('kpDots');
+    const slides = slider ? slider.querySelectorAll('.kp-slide') : [];
+    let curSlide = 0;
+    let autoPlay;
+
+    if (slides.length) {
+        slides.forEach((_, i) => {
+            const d = document.createElement('button');
+            d.className = 'kp-dot' + (i === 0 ? ' active' : '');
+            d.onclick = () => goSlide(i);
+            dotsWrap.appendChild(d);
+        });
+
+        function goSlide(n) {
+            curSlide = (n + slides.length) % slides.length;
+            slider.style.transform = `translateX(-${curSlide * 100}%)`;
+            dotsWrap.querySelectorAll('.kp-dot').forEach((d, i) => d.classList.toggle('active', i === curSlide));
+        }
+
+        document.getElementById('kpPrev').onclick = () => { goSlide(curSlide - 1); resetAuto(); };
+        document.getElementById('kpNext').onclick = () => { goSlide(curSlide + 1); resetAuto(); };
+
+        function startAuto() { autoPlay = setInterval(() => goSlide(curSlide + 1), 4000); }
+        function resetAuto() { clearInterval(autoPlay); startAuto(); }
+        startAuto();
+    }
+
+    /* ── Process Step Animation ── */
+    const steps = document.querySelectorAll('.proc-step');
+    const procObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                steps.forEach((s, i) => setTimeout(() => s.classList.add('visible'), i * 210));
+                procObs.disconnect();
+            }
+        });
+    }, { threshold: 0.3 });
+    const pf = document.getElementById('processFlow');
+    if (pf) procObs.observe(pf);
+
+
+    /* ── Form Submit ── */
+    function handleSubmit(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.textContent = '신청 완료! 빠르게 연락드리겠습니다.';
+        btn.style.background = 'var(--accent)';
+        btn.disabled = true;
+        setTimeout(() => {
+            btn.textContent = '상담 신청하기';
+            btn.style.background = '';
+            btn.disabled = false;
+            e.target.reset();
+        }, 4000);
+    }
+
+    /* ── Privacy Modal ── */
+    function openPrivacy() { document.getElementById('privacyModal').style.display = 'flex'; }
+    function closePrivacy() { document.getElementById('privacyModal').style.display = 'none'; }
+    document.getElementById('privacyModal').addEventListener('click', function(e) {
+        if (e.target === this) closePrivacy();
+    });
+
+    /* ── Mobile Menu ── */
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('navMenu');
+    let menuOpen = false;
+    toggle.addEventListener('click', () => {
+        menuOpen = !menuOpen;
+        if (menuOpen) {
+            menu.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:64px;right:0;background:white;padding:24px 32px;gap:22px;box-shadow:0 8px 32px rgba(0,0,0,0.12);min-width:200px;z-index:999;';
+            menu.querySelectorAll('a').forEach(a => { a.style.color = 'var(--text-dark)'; a.style.fontSize = '16px'; });
+        } else {
+            menu.style.cssText = '';
+        }
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menuOpen = false; menu.style.cssText = ''; }));
+
+    /* ── Anchor Smooth Scroll ── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const href = a.getAttribute('href');
+            if (href && href.length > 1) {
+                e.preventDefault();
+                const t = document.querySelector(href);
+                if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 72, behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+</body>
+</html>
